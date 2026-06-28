@@ -4,11 +4,11 @@ WORKDIR /app
 
 # Copy the pom.xml and download dependencies (cached layer optimization)
 COPY pom.xml .
-RUN mven dependency:go-offline -B || true
+RUN mvn dependency:go-offline -B || true
 
 # Copy your source code and build the executable jar file
 COPY src ./src
-RUN mven clean package -DskipTests
+RUN mvn clean package -DskipTests
 
 # Stage 2: Create the lightweight runtime image
 FROM eclipse-temurin:21-jre-alpine
